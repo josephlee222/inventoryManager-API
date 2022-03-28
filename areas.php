@@ -3,6 +3,7 @@
 
 // Content-Type: application/json
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
 
 // Import database connection and auth functions
 include_once "includes/connect.php";

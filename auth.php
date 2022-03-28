@@ -2,6 +2,7 @@
 
 // content-type: application/json
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
 
 // Connect function
 include_once "includes/connect.php";
