@@ -8,6 +8,7 @@ header('Access-Control-Allow-Origin: *');
 
 // Import connection and auth functions
 include_once "includes/connect.php";
+include_once "includes/options.php";
 include_once "includes/authFunctions.php";
 include_once "includes/standardFunctions.php";
 

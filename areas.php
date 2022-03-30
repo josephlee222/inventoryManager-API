@@ -7,6 +7,7 @@ header('Access-Control-Allow-Origin: *');
 
 // Import database connection and auth functions
 include_once "includes/connect.php";
+include_once "includes/options.php";
 include_once "includes/authFunctions.php";
 
 // Check if token is set and vaild
