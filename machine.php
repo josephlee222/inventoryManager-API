@@ -30,6 +30,12 @@ if (isset($token) && checkJWT($token)) {
             $sql .= " WHERE id = '$id'";
         }
 
+        // Check if there is a area query
+        if (isset($_GET["area"])) {
+            $area = $_GET["area"];
+            $sql .= " WHERE area_id = '$area'";
+        }
+
         // Check if there is a sort query
         if (isset($_GET["sort"])) {
             $sort = $_GET["sort"];
@@ -52,12 +58,6 @@ if (isset($token) && checkJWT($token)) {
         if (isset($_GET["offset"])) {
             $offset = $_GET["offset"];
             $sql .= " OFFSET $offset";
-        }
-
-        // Check if there is a area query
-        if (isset($_GET["area"])) {
-            $area = $_GET["area"];
-            $sql .= " WHERE area_id = '$area'";
         }
 
         // Execute query

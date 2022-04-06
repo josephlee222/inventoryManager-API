@@ -30,6 +30,24 @@ if (isset($token) && checkJWT($token)) {
             $sql .= " WHERE id = '$id'";
         }
 
+        // Check whether there is a machine query
+        if (isset($_GET["machine"])) {
+            $machine = $_GET["machine"];
+            $sql .= " WHERE machine_id = '$machine'";
+        }
+
+        // Fliter by expired time
+        if (isset($_GET["expired"])) {
+            $time = $_GET["expired"];
+            $sql .= " WHERE best_before_date < '$time'";
+        }
+
+        // Fliter by changed time
+        if (isset($_GET["changed"])) {
+            $time = $_GET["changed"];
+            $sql .= " WHERE changed_date < '$time'";
+        }
+
         // Check if there is a sort query
         if (isset($_GET["sort"])) {
             $sort = $_GET["sort"];
@@ -52,24 +70,6 @@ if (isset($token) && checkJWT($token)) {
         if (isset($_GET["offset"])) {
             $offset = $_GET["offset"];
             $sql .= " OFFSET $offset";
-        }
-
-        // Check whether there is a machine query
-        if (isset($_GET["machine"])) {
-            $machine = $_GET["machine"];
-            $sql .= " WHERE machine_id = '$machine'";
-        }
-
-        // Fliter by expired time
-        if (isset($_GET["expired"])) {
-            $time = $_GET["expired"];
-            $sql .= " WHERE best_before_date < '$time'";
-        }
-
-        // Fliter by changed time
-        if (isset($_GET["changed"])) {
-            $time = $_GET["changed"];
-            $sql .= " WHERE changed_date < '$time'";
         }
 
         // Execute query

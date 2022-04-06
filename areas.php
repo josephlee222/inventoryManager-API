@@ -27,6 +27,12 @@ if (isset($token) && checkJWT($token)) {
             $sql .= " WHERE id = '$id'";
         }
 
+        // Check if there is a place query
+        if (isset($_GET["place"])) {
+            $place = $_GET["place"];
+            $sql .= " WHERE place_id = '$place'";
+        }
+
         // Check if there is a sort query
         if (isset($_GET["sort"])) {
             $sort = $_GET["sort"];
@@ -51,19 +57,13 @@ if (isset($token) && checkJWT($token)) {
             $sql .= " OFFSET $offset";
         }
 
-        // Check if there is a place query
-        if (isset($_GET["place"])) {
-            $place = $_GET["place"];
-            $sql .= " WHERE place_id = '$place'";
-        }
-
         // Execute query
         $result = mysqli_query($db_connect, $sql);
 
         // Check if query failed
         if (!$result) {
             http_response_code(500);
-            $error = array("status" => 500, "result" => "mySQL query failed: " . mysqli_error($db_connect));
+            $error = array("status" => 500, "result" => "mySQL query failed: " . mysqli_error($db_connect) . $sql);
             echo json_encode($error);
         } else {
             // Display areas
