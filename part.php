@@ -105,6 +105,13 @@ if (isset($token) && checkJWT($token)) {
                     $type = mysqli_fetch_assoc($result_type);
                     $part["part_type"] = $type;
                 }
+
+                $current_time = time();
+                $best_before_date = strtotime($part["best_before_date"]);
+
+                // Count days until best before date and round to nearest day
+                $days_until_best_before = ceil(($best_before_date - $current_time) / 86400);
+                $part["days_until_best_before"] = $days_until_best_before;
                 array_push($parts, $part);
             }
             echo json_encode(array("status" => 200, "result" => $parts), JSON_NUMERIC_CHECK);
